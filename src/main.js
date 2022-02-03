@@ -7,7 +7,6 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
 
-Vue.use(mavonEditor)
 Vue.use(ElementUI)
 Vue.prototype.imgUrl = 'https://cdn-file.tbzj.net/fileserver/file/'
 

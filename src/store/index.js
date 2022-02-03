@@ -49,11 +49,8 @@ export default new Vuex.Store({
             title: "商品管理",
             children: [
               { path: "/goods/goods/index", title: "商品列表 " },
-              { path: "/goods/goods/indexSup", title: "商品列表(供)" },
               { path: "/goods/goods/add", title: "添加商品 " },
-              { path: "/goods/goods/addSup", title: "添加商品(供)" },
               { path: "/goods/goods/check", title: "商品审核" },
-              { path: "/goods/supplier/index", title: "店铺管理", status: false },
               { path: "/goods/goods_comment", title: "商品评论", status: false }
             ]
           },
@@ -63,14 +60,6 @@ export default new Vuex.Store({
               { path: "/goods/attribute/index", title: "商品类型" },
               { path: "/goods/category/index", title: "商品分类" },
               { path: "/goods/brand/index", title: "品牌管理" }
-            ]
-          },
-          {
-            title: "设计师",
-            children: [
-              { path: "/goods/designer/index", title: "设计师列表" },
-              { path: "/goods/designer/add", title: "添加设计师" },
-              { path: "/goods/designer/check", title: "设计师审核" }
             ]
           }
         ]
@@ -122,76 +111,6 @@ export default new Vuex.Store({
         ]
       },
       {
-        title: "促销",
-        name: "promotion",
-        icon: "el-icon-discount",
-        children: [
-          {
-            title: "秒杀专区",
-            children: [
-              { path: "/promotion/seckill/index", title: "秒杀活动列表" }
-              // { path: "/promotion/seckill/time", title: "时间段列表" },
-              // { path: "/promotion/seckill/remind", title: "秒杀提醒通知" }
-            ],
-            status: false
-          },
-          {
-            title: "优惠券管理",
-            children: [
-              { path: "/promotion/coupon/index", title: "优惠券列表" },
-              { path: "/promotion/coupon/add", title: "添加优惠券" }
-            ],
-            status: false
-          },
-          {
-            title: "活动管理",
-            children: [
-              { path: "/promotion/discount/index", title: "活动列表" },
-              { path: "/promotion/discount/add", title: "添加活动" },
-            ],
-            status: false
-          },
-          {
-            title: "投票活动",
-            children: [
-              { path: "/promotion/voteactivity/voteActivityList", title: "活动列表" }
-            ]
-          },
-          {
-            title: "落地页",
-            children: [
-              { path: "/promotion/landing/landingConfig", title: "页面配置" }
-            ]
-          },
-          {
-            title: "拼团",
-            children: [
-              { path: "/promotion/groupShopping/index", title: "拼团商品" },
-              { path: "/promotion/groupShopping/order", title: "拼团管理" },
-              { path: "/promotion/groupShopping/setting", title: "拼团设置" }
-            ]
-          },
-          {
-            title: "分销管理",
-            children: [
-              { path: "/promotion/distribuManage/disGroupList", title: "团队列表" },
-              { path: "/promotion/distribuManage/distribuList", title: "分销列表" },
-              { path: "/promotion/distribuManage/distribuSet", title: "分销设置" },
-              { path: "/promotion/distribuManage/withdrawalList", title: "提现列表" },
-              { path: "/promotion/distribuManage/withdrawalSet", title: "提现设置" }
-            ]
-          },
-          {
-            title: "首页推荐",
-            children: [
-              { path: "/promotion/indexRecommend/brandday", title: "涂邦品牌日" },
-              { path: "/promotion/indexRecommend/tbSeckill", title: "涂邦快抢" },
-              { path: "/promotion/indexRecommend/popularRecommend", title: "人气推荐" },
-            ]
-          }
-        ]
-      },
-      {
         title: "运营",
         name: "operate",
         icon: "el-icon-s-platform",
@@ -201,185 +120,6 @@ export default new Vuex.Store({
             children: [
               { path: "/operate/ad/index", title: "广告列表" },
               { path: "/operate/ad/add", title: "添加广告" }
-            ]
-          }
-        ]
-      },
-      {
-        title: "设计",
-        name: "design",
-        icon: "el-icon-s-opportunity",
-        children: [
-          {
-            title: "设计公司",
-            children: [
-              { path: "/design/company/index", title: "设计公司列表" },
-              { path: "/design/company/companyLevel", title: "设计师公司等级" },
-              { path: "/design/company/companyinSet", title: "入驻设置" },
-              { path: "/design/company/orderDemand", title: "预约需求" },
-            ]
-          }
-        ]
-      },
-      {
-        title: "区域",
-        name: "cityOperation",
-        icon: "el-icon-office-building",
-        children: [
-          {
-            title: "运营中心管理",
-            children: [
-              { path: "/cityOperation/CityOpera/CityOperation_idx", title: "运营中心列表" },
-              { path: "/cityOperation/decorate/decorate_company", title: "装修公司列表" },
-            ]
-          }
-        ]
-      },
-      {
-        title: "全屋",
-        name: "house",
-        icon: "el-icon-folder-add",
-        children: [
-          {
-            title: "全屋设计管理",
-            children: [
-              { path: "/house/houseDesign/houseDesign_idx", title: "设计方案列表" },
-              { path: "/house/houseType/houseTypeCategory", title: "户型分类" },
-              // { path: "/house/houseStyle/houseStyleCategory", title: "风格分类" },
-              { path: "/house/demand/demand_idx", title: "需求列表" }
-            ]
-          }
-        ],
-        status: false
-      },
-      {
-        title: "设置",
-        name: "setings",
-        icon: "el-icon-setting",
-        children: [
-          {
-            title: "设置管理",
-            children: [
-              { path: "/setings/index/houseType", title: "户型管理" }
-            ]
-          },
-          {
-            title: "支付配送",
-            children: [
-              { path: "/setings/freight/index", title: "运费模板" }
-            ]
-          },
-          {
-            title: "消息提醒",
-            children: [
-              { path: "/setings/message/index", title: "app推送消息模板", status: 0 },
-              { path: "/setings/message/weiXin", title: "小程序订阅消息", status: 0 },
-            ]
-          },
-          {
-            title: "IM管理",
-            children: [
-              { path: "/setings/imManage/imRoleManage", title: "IM角色管理" }
-            ]
-          },
-          {
-            title: "版本",
-            children: [
-              { path: "/setings/edition/index", title: "版本管理" }
-            ]
-          }
-        ]
-      },
-      {
-        title: "内容",
-        name: "content",
-        icon: "el-icon-menu",
-        children: [
-          {
-            title: "圈子详情",
-            children: [
-              { path: "/content/circle/topic_index", title: "话题列表" },
-              { path: "/content/circle/article_index", title: "文章列表" },
-              { path: "/content/circle/article_check", title: "文章审核" }
-            ]
-          }, {
-            title: "灵感详情",
-            children: [
-              { path: "/content/circle/inspiration_index", title: "灵感列表" },
-              { path: "/content/circle/inspiration_check", title: "灵感审核" },
-            ]
-          }, {
-            title: "设计师",
-            children: [
-              { path: "/content/circle/editDesigner", title: "设计师基本信息" },
-            ]
-          }, {
-            title: "涂邦资讯",
-            children: [
-              { path: "/content/circle/tbinformation-idx", title: "资讯列表" },
-              { path: "/content/circle/tbinformation_check", title: "资讯审核" },
-            ]
-          }, {
-            title: "案例管理",
-            children: [
-              { path: "/content/promanage/prolist", title: "案例列表" },
-              { path: "/content/promanage/offerDemand", title: "报价需求" },
-              { path: "/content/promanage/villageList", title: "小区列表" },
-              { path: "/content/promanage/styleList", title: "风格列表" }
-            ]
-          }
-        ]
-      },
-      {
-        title: "统计",
-        name: "statistics",
-        icon: "el-icon-s-data",
-        children: [
-          {
-            title: "商城数据",
-            children: [
-              { path: "/statistics/shopData/goodsdata", title: "商品数据" },
-              { path: "/statistics/shopData/shopdata", title: "店铺数据" }
-            ]
-          }
-        ]
-      },
-      {
-        title: "财务",
-        name: "finance",
-        icon: "el-icon-coin",
-        children: [
-          {
-            title: "财务管理",
-            children: [
-              { path: "/finance/pa/reconciliationList", title: "对账列表" },
-              { path: "/finance/pa/capitalAccount/list", title: "资金账户" }
-            ]
-          }
-        ]
-      },
-      {
-        title: "装修",
-        name: "trim",
-        icon: "el-icon-brush",
-        children: [
-          {
-            title: "装修角色管理",
-            children: [
-              { path: "/trim/trimrole/trimmanage", title: "装修管家" },
-              { path: "/trim/trimrole/trimSerproviderRole", title: "服务商角色" },
-              { path: "/trim/trimrole/trimSerprovider", title: "服务商" },
-              { path: "/trim/trimrole/trimPromanage", title: "项目经理" },
-              { path: "/trim/trimrole/proprietor", title: "业主" }
-            ]
-          },
-          {
-            title: "装修流程管理",
-            children: [
-              { path: "/trim/trimprocess/trimprocesslist", title: "装修流程配置" },
-              { path: "/trim/trimorder/list", title: "装修订单" },
-              { path: "/trim/trimorder/trimProfitList", title: "装修订单利润" },
-              { path: "/trim/trimorder/applyProfitCheck", title: "分账审核" }
             ]
           }
         ]
@@ -397,47 +137,6 @@ export default new Vuex.Store({
               { path: "/permission/customerService", title: "客服管理", status: false },
               { path: "/permission/supplier/index", title: "供应商管理" },
               { path: "/permission/menu/management", title: "菜单管理" }
-            ]
-          }
-        ]
-      },
-      {
-        title: "商家",
-        name: "supplier",
-        icon: "el-icon-s-shop",
-        children: [
-          {
-            title: "店铺管理",
-            children: [
-              { path: "/supplier/editSupplier", title: "编辑店铺信息" },
-            ]
-          },
-          {
-            title: "权限管理",
-            children: [
-              { path: "/supplier/department/departmentManagement", title: "部门管理" },
-              { path: "/supplier/member/member", title: "成员管理" }
-            ]
-          },
-          {
-            title: "发货点信息管理",
-            children: [
-              { path: '/supplier/delivery/deliveryInformation', title: "发货点信息管理" },
-              { path: '/supplier/delivery/addDelivery', title: "添加发货点" },
-            ]
-          }
-        ]
-      },
-      {
-        title: "家魔方",
-        name: "magic",
-        icon: "el-icon-magic-stick",
-        children: [
-          {
-            title: "家魔方管理",
-            children: [
-              { path: "/magic/cdkey", title: "激活码" },
-              { path: "/magic/recommend", title: "推荐管理" }
             ]
           }
         ]
