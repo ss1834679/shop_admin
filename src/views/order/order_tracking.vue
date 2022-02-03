@@ -20,7 +20,7 @@
   </div>
 </template>
 <script>
-import { getExpress } from "../../api/pay";
+// import { getExpress } from "../../api/pay";
 export default {
   data() {
     return {
@@ -34,19 +34,19 @@ export default {
   mounted() {
     // 调用订单物流信息接口
     if (this.$route.query.expressNumber && this.$route.query.deliveryCode) {
-      getExpress(this.$route.query.deliveryCode, this.$route.query.expressNumber).then(data => {
-        if (data.data.status == 200) {
-          if (data.data.content.message == "ok") {
-            this.activities = data.data.content.data;
-            this.activitiesLength = this.activities.length;
-            this.$message({ message: "查询快递成功", type: "success" });
-          } else {
-            this.$message.warning(data.data.content.message);
-          }
-        } else {
-          this.$message.error(data.data.msg);
-        }
-      });
+      // getExpress(this.$route.query.deliveryCode, this.$route.query.expressNumber).then(data => {
+      //   if (data.data.status == 200) {
+      //     if (data.data.content.message == "ok") {
+      //       this.activities = data.data.content.data;
+      //       this.activitiesLength = this.activities.length;
+      //       this.$message({ message: "查询快递成功", type: "success" });
+      //     } else {
+      //       this.$message.warning(data.data.content.message);
+      //     }
+      //   } else {
+      //     this.$message.error(data.data.msg);
+      //   }
+      // });
     } else {
       this.$message.warning("该订单物流信息不全！");
     }

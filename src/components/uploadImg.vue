@@ -36,7 +36,6 @@
 
 <script>
 import { uploadFileOss } from "../api/fileSever";
-// import imageConversion from "image-conversion"; /* 图片压缩的包 */
 
 export default {
   name: "uploadImg",

@@ -24,12 +24,11 @@
               clearable
             ></el-cascader>
           </div>
-          <div class="search_box">
+          <!-- <div class="search_box">
             <el-select v-model="searchBrandId" @change="selectByKwd" filterable placeholder="请选择品牌(可搜索)" clearable>
-              <!-- 后台获取 -->
               <el-option v-for="item in brandList" :key="item.id" :label="item.brandName" :value="item.id"></el-option>
             </el-select>
-          </div>
+          </div> -->
           <el-button type="text" @click="clearSearch">清空搜索</el-button>
         </div>
         <el-table :data="goodsList" border style="width: 100%" @selection-change="getSelection">
@@ -88,7 +87,7 @@
 <script>
 import { getGoodsList, verifyGood } from "../../api/good";
 import { getCategory } from "../../api/category";
-import { getBrandList } from "../../api/brand";
+// import { getBrandList } from "../../api/brand";
 import Thumbnail from "../../components/thumbnail";
 import paginationCom from "../../components/paginationCom";
 export default {
@@ -101,7 +100,7 @@ export default {
       categoryTwo: "",
       categoryThree: "",
       goodsList: [],
-      brandList: [] /* 获取的品牌列表 */,
+      // brandList: [] /* 获取的品牌列表 */,
       categoryList: [] /* 获取的分类列表 */,
       checkForm: {
         ids: "" /* 审核的id */,
@@ -135,11 +134,11 @@ export default {
   mounted() {
     this.showAll();
     /* 初始化品牌搜索列表 */
-    getBrandList({ pageNo: 1, pageSize: 300 }).then(data => {
-      if (data.data.status == 0) {
-        this.brandList = data.data.data.list;
-      }
-    });
+    // getBrandList({ pageNo: 1, pageSize: 300 }).then(data => {
+    //   if (data.data.status == 0) {
+    //     this.brandList = data.data.data.list;
+    //   }
+    // });
 
     /* 初始化级联列表 */
     getCategory().then(data => {

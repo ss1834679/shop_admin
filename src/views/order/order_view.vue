@@ -269,25 +269,6 @@
         <el-form-item label="手机号码:">
           <el-input v-model="updateConsigneeInfoFrom.phone"></el-input>
         </el-form-item>
-        <el-form-item label="所在区域:">
-          <div style="display:flex">
-            <div style="width:140px;">
-              <el-select v-model="updateConsigneeInfoFrom.province" placeholder="省" @change="changeProvince({level:1})" filterable clearable>
-                <el-option :label="item.criName" :value="item.criCode" v-for="item in provinceList" :key="item.id"></el-option>
-              </el-select>
-            </div>
-            <div style="width:140px;">
-              <el-select v-model="updateConsigneeInfoFrom.city" placeholder="市" @change="changeProvince({level:2})" filterable clearable>
-                <el-option :label="item.criName" :value="item.criCode" v-for="item in cityList" :key="item.id"></el-option>
-              </el-select>
-            </div>
-            <div style="width:140px;">
-              <el-select v-model="updateConsigneeInfoFrom.district" placeholder="区" @change="changeProvince({level:3})" filterable clearable>
-                <el-option :label="item.criName" :value="item.criCode" v-for="item in countyList" :key="item.id"></el-option>
-              </el-select>
-            </div>
-          </div>
-        </el-form-item>
         <el-form-item label="详细地址:">
           <el-input v-model="updateConsigneeInfoFrom.addrInfo" type="textarea" :rows="6"></el-input>
         </el-form-item>
@@ -396,8 +377,7 @@ import {
   deleteOrder,
   closeOrder
 } from "../../api/order";
-import { getProvinceList, getRegionList } from "../../api/usercenter";
-import { getExpress } from "../../api/pay";
+// import { getExpress } from "../../api/pay";
 import Thumbnail from "../../components/thumbnail";
 export default {
   components: { Thumbnail },
@@ -557,19 +537,19 @@ export default {
         // this.orderDetails.deliveryCode,this.orderDetails.expressNumber
         if (this.orderDetails.orderStatus == 3 || this.orderDetails.orderStatus == 4) {
           // 调用订单物流信息接口
-          getExpress(data.data.data.deliveryCode, data.data.data.expressNumber).then(data => {
-            if (data.data.status == 200) {
-              if (data.data.content.message == "ok") {
-                this.activities = data.data.content.data;
-                this.activitiesLength = this.activities.length;
-                this.$message({ message: "查询快递成功", type: "success" });
-              } else {
-                this.$message.warning(data.data.content.message);
-              }
-            } else {
-              this.$message.error(data.data.msg);
-            }
-          });
+          // getExpress(data.data.data.deliveryCode, data.data.data.expressNumber).then(data => {
+          //   if (data.data.status == 200) {
+          //     if (data.data.content.message == "ok") {
+          //       this.activities = data.data.content.data;
+          //       this.activitiesLength = this.activities.length;
+          //       this.$message({ message: "查询快递成功", type: "success" });
+          //     } else {
+          //       this.$message.warning(data.data.content.message);
+          //     }
+          //   } else {
+          //     this.$message.error(data.data.msg);
+          //   }
+          // });
         }
       });
     }
@@ -632,25 +612,6 @@ export default {
           });
         }
       });
-    },
-    // submitForm() {
-    // },
-    // 切换省市区
-    changeProvince(obj) {
-      if (obj.level == 1) {
-        getRegionList(this.updateConsigneeInfoFrom.province).then(data => {
-          this.cityList = data.data.content;
-        });
-        this.updateConsigneeInfoFrom.city = "";
-        this.updateConsigneeInfoFrom.district = "";
-        this.district = {};
-        this.countyList = [];
-      } else if (obj.level == 2) {
-        getRegionList(this.updateConsigneeInfoFrom.city).then(data => {
-          this.countyList = data.data.content;
-        });
-        this.updateConsigneeInfoFrom.district = "";
-      }
     },
     // 确定备注
     noteClick() {

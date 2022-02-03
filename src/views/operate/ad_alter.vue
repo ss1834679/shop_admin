@@ -67,39 +67,6 @@
             <span v-if="added.goodsTitle" class="added">已添加 : {{added.goodsTitle}}</span>
             <span v-if="!alter" class="added">已添加商品id : {{adform.url}}</span>
           </el-form-item>
-          <el-form-item v-if="adform.type==4" label="跳转团购商品">
-            <div class="searchBar">
-              <div class="search_box">
-                <el-select v-model="added" filterable remote value-key="id" :remote-method="selectGroupGoods" placeholder="请选择拼团商品(可搜索)" clearable>
-                  <el-option v-for="item in groupGoodsList" :key="item.id" :label="item.goodsTitle" :value="item"></el-option>
-                </el-select>
-              </div>
-            </div>
-            <span v-if="added.goodsTitle" class="added">已添加 : {{added.goodsTitle}}</span>
-            <span v-if="!alter" class="added">已添加拼团商品id : {{adform.url}}</span>
-          </el-form-item>
-          <el-form-item v-if="adform.type==2" label="跳转文章">
-            <div class="searchBar">
-              <div class="search_box">
-                <el-select v-model="added" filterable remote value-key="id" :remote-method="selectArticle" placeholder="请选择文章(可搜索)" clearable>
-                  <el-option v-for="item in articleList" :key="item.id" :label="item.title" :value="item"></el-option>
-                </el-select>
-              </div>
-            </div>
-            <span v-if="added.title" class="added">已添加 : {{added.title}}</span>
-            <span v-if="!alter" class="added">已添加文章id : {{adform.url}}</span>
-          </el-form-item>
-          <el-form-item v-if="adform.type==3" label="跳转灵感">
-            <div class="searchBar">
-              <div class="search_box">
-                <el-select v-model="added" filterable remote value-key="id" :remote-method="selectInspiration" placeholder="请选择灵感(可搜索)" clearable>
-                  <el-option v-for="item in inspirationList" :key="item.id" :label="item.title" :value="item"></el-option>
-                </el-select>
-              </div>
-            </div>
-            <span v-if="added.title" class="added">已添加 : {{added.title}}</span>
-            <span v-if="!alter" class="added">已添加灵感id : {{adform.url}}</span>
-          </el-form-item>
           <el-form-item label="广告备注">
             <el-input v-model="adform.comment"></el-input>
           </el-form-item>
@@ -115,9 +82,7 @@
 <script>
 import uploadImg from "../../components/uploadImg";
 import { editAdvert, getAdvertById } from "../../api/advert";
-import { getArticleListAll, getInspirationListAll } from "../../api/circle";
 import { getGoodsList } from "../../api/good";
-import { getAssembleGoods } from "../../api/promotion";
 export default {
   data() {
     return {
@@ -265,37 +230,6 @@ export default {
         }).then(data => {
           if (data.data.status == 0) {
             this.goodsList = data.data.data.data.list;
-          }
-        });
-      }
-    },
-    selectGroupGoods(val) {
-      if (val != "") {
-        getAssembleGoods({
-          pageNo: 1,
-          pageSize: 40,
-          goodsTitle: val
-        }).then(data => {
-          if (data.data.status == 0) {
-            this.groupGoodsList = data.data.data.data.list;
-          }
-        });
-      }
-    },
-    selectArticle(val) {
-      if (val != "") {
-        getArticleListAll(val).then(data => {
-          if (data.data.status == 0) {
-            this.articleList = data.data.data;
-          }
-        });
-      }
-    },
-    selectInspiration(val) {
-      if (val != "") {
-        getInspirationListAll(val).then(data => {
-          if (data.data.status == 0) {
-            this.inspirationList = data.data.data;
           }
         });
       }

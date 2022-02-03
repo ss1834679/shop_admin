@@ -255,26 +255,6 @@
               <el-form-item label="发货人">
                 <el-input v-model="form.name"></el-input>
               </el-form-item>
-              <el-form-item label="选择区域">
-                <div style="display:flex">
-                  <div style="width:140px;">
-                    <el-select v-model="provinceListForm.provinceId" placeholder="省" @change="changeProvince({level:1})" filterable clearable>
-                      <el-option :label="item.criName" :value="item.criCode" v-for="item in provinceList" :key="item.id"></el-option>
-                    </el-select>
-                  </div>
-                  <div style="width:140px;">
-                    <el-select v-model="provinceListForm.cityId" placeholder="市" @change="changeProvince({level:2})" filterable clearable>
-                      <el-option :label="item.criName" :value="item.criCode" v-for="item in cityList" :key="item.id"></el-option>
-                    </el-select>
-                  </div>
-                  <div style="width:140px;">
-                    <el-select v-model="form.region3" placeholder="区" @change="changeProvince({level:3})" filterable clearable>
-                      <el-option label="区域一" value="shanghai"></el-option>
-                      <el-option label="区域二" value="beijing"></el-option>
-                    </el-select>
-                  </div>
-                </div>
-              </el-form-item>
               <el-form-item label="详情地址">
                 <el-input v-model="form.address"></el-input>
               </el-form-item>
@@ -315,8 +295,6 @@ import {
   closeOrder,
   exportOrderExcelCon
 } from "../../api/order";
-import { getSupplierAll } from "../../api/supplier";
-import { getProvinceList, getRegionList } from "../../api/usercenter";
 import paginationCom from "../../components/paginationCom";
 export default {
   components: {
@@ -486,37 +464,8 @@ export default {
     } else {
       this.showAll();
     }
-    /**
-     * 获取省直辖市地址列表
-     */
-    getProvinceList().then(data => {
-      this.provinceList = data.data.content;
-    });
-    // 供应商列表
-    getSupplierAll().then(data => {
-      if (data.data.status == 200) {
-        this.supplierList = data.data.content;
-      }
-    });
   },
   methods: {
-    // 切换省市区
-    changeProvince(obj) {
-      if (obj.level == 2) {
-        getRegionList(this.provinceListForm.provinceId).then(data => {
-          this.cityList = data.data.content;
-        });
-        this.provinceListForm.cityId = "";
-        this.provinceListForm.countyId = "";
-        this.countyId = {};
-        this.countyList = [];
-      } else if (obj.level == 3) {
-        getRegionList(this.provinceListForm.cityId).then(data => {
-          this.countyList = data.data.content;
-        });
-        this.provinceListForm.countyId = "";
-      }
-    },
     // 导出订单
     exportOrderExcelClike(key) {
       if (key == "all") {

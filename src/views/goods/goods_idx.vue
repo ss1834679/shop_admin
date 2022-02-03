@@ -27,12 +27,6 @@
             <el-cascader ref="categoryList" v-model="searchCateId" :props="props" :options="categoryList" :show-all-levels="false" clearable></el-cascader>
           </div>
           <div class="search_box">
-            <span>所属品牌：</span>
-            <el-select v-model="searchBrandId" @change="selectByKwd" filterable placeholder="请选择品牌(可搜索)" clearable>
-              <el-option v-for="item in brandList" :key="item.id" :label="item.brandName" :value="item.id"></el-option>
-            </el-select>
-          </div>
-          <div class="search_box">
             <span>添加时间：</span>
             <el-date-picker
               v-model="searchTime"
@@ -141,7 +135,6 @@
 <script>
 import { getGoodsList, getVerify, deleteGoods, updateGoodDown, updateGoodUp } from "../../api/good";
 import { getCategory } from "../../api/category";
-import { getBrandList } from "../../api/brand";
 import paginationCom from "../../components/paginationCom";
 import Thumbnail from "../../components/thumbnail";
 import switchCom from "../../components/switch";
@@ -151,7 +144,6 @@ export default {
     return {
       status: "all" /* 大的筛选条件 */,
       searchInput: "" /* 名称 / 货号 */,
-      searchBrandId: "" /* 品牌搜索id */,
       searchCateId: [] /* 分类搜索id */,
       searchIsRetailStore: "all" /* 是否分销搜索 */,
       searchTime: [],
@@ -220,12 +212,6 @@ export default {
     } else {
       this.showAll();
     }
-    /* 初始化品牌搜索列表 */
-    getBrandList({ pageNo: 1, pageSize: 9999 }).then(data => {
-      if (data.data.status == 0) {
-        this.brandList = data.data.data.list;
-      }
-    });
     /* 初始化级联列表 */
     getCategory().then(data => {
       if (data.data.status == 0) {
@@ -291,7 +277,6 @@ export default {
       this.categoryOne = "";
       this.categoryTwo = "";
       this.categoryThree = "";
-      this.searchBrandId = "";
       this.status = "all";
       this.searchInput = "";
       this.searchTime = [];
@@ -307,7 +292,6 @@ export default {
       if (
         this.searchInput != "" ||
         this.status != "all" ||
-        this.searchBrandId != "" ||
         this.categoryOne != "" ||
         this.startTime != null ||
         this.startPrice != undefined
@@ -329,7 +313,6 @@ export default {
         categoryOne: this.categoryOne == "" ? null : this.categoryOne,
         categoryTwo: this.categoryTwo == "" ? null : this.categoryTwo,
         categoryThree: this.categoryThree == "" ? null : this.categoryThree,
-        brandId: this.searchBrandId == "" ? null : this.searchBrandId,
         goodsStatus: this.status == "all" ? null : Number(this.status),
         goodsTitle: this.searchInput == "" ? null : this.searchInput,
         startTime: this.startTime,

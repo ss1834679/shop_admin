@@ -1,4 +1,7 @@
 import advert from '../utils/server'
+
+// todo ADMIN 管理端设置轮播图的接口
+
 /* 获取广告列表 */
 export function getAdvertList(obj) {
     return advert({

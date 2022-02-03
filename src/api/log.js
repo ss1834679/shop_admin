@@ -1,5 +1,7 @@
 import server from '../utils/server'
 
+// todo ADMIN 登录的接口
+
 /**
  * 登录接口
  * @param {*} obj 登录的信息
@@ -14,9 +16,9 @@ export function getLogin(obj) {
 /**
  * 退出登录
  */
-export function getLogOut() {
-    return server({
-        url: "/shiro/logout",
-        method: "get"
-    })
-}
+// export function getLogOut() {
+//     return server({
+//         url: "/shiro/logout",
+//         method: "get"
+//     })
+// }

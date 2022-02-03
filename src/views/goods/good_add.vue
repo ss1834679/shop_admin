@@ -60,11 +60,11 @@
             <el-form-item label="商品副标题(简介)" required prop="goodsSubtitle">
               <el-input v-model="goodsform.goodsSubtitle"></el-input>
             </el-form-item>
-            <el-form-item label="所属品牌" required prop="brandId">
+            <!-- <el-form-item label="所属品牌" required prop="brandId">
               <el-select v-model="goodsform.brandId" filterable placeholder="请选择品牌(可搜索)">
                 <el-option v-for="(item,index) in brandList" :key="index" :label="item.brandName" :value="item.id"></el-option>
               </el-select>
-            </el-form-item>
+            </el-form-item> -->
             <el-form-item label="所属店铺" required prop="supplierId">
               <el-select v-model="goodsform.supplierId" filterable placeholder="请选择店铺(可搜索)">
                 <el-option v-for="item in supplierList" :key="item.id" :label="item.name" :value="item.id"></el-option>
@@ -328,12 +328,11 @@
                     clearable
                   ></el-cascader>
                 </div>
-                <div class="search_box">
+                <!-- <div class="search_box">
                   <el-select v-model="searchBrandId" filterable placeholder="请选择品牌(可搜索)" clearable>
-                    <!-- 后台获取 -->
                     <el-option v-for="item in brandList" :key="item.id" :label="item.brandName" :value="item.id"></el-option>
                   </el-select>
-                </div>
+                </div> -->
                 <div class="search_box">
                   <el-input :placeholder="'请输入搜索关键词'" v-model="searchInput"></el-input>
                 </div>
@@ -384,11 +383,8 @@ import precisionInput from "../../components/precisionInput";
 import tagAdd from "../../components/tags";
 import autoTable from "../../components/autoTable";
 import { getCategoryByPar, getCategoryById, getCategory } from "../../api/category";
-import { getBrandList } from "../../api/brand";
-import { getSupplierAll } from "../../api/supplier";
+// import { getBrandList } from "../../api/brand";
 import { addGood, getGoodsList, getGoodsStyleByCategoryId } from "../../api/good";
-import { getTemplatesList } from "../../api/setings";
-import { getTemplatesListBySup } from "../../api/setings";
 import { mapGetters } from "vuex";
 export default {
   data() {
@@ -476,7 +472,7 @@ export default {
       categoryNameList: [],
       categoryNameThree: "",
       placeform: [{ placeTitle: "", placeNum: 100, placeWeight: null, placeCore: "" }] /* 批量填充数据 */,
-      brandList: [] /* 品牌表(获取) */,
+      // brandList: [] /* 品牌表(获取) */,
       templateList: [] /* 运费模板列表（供应商） */,
       styleList: [] /* 一级分类下的风格列表 */,
       supplierList: [] /* 店铺列表 */,
@@ -508,24 +504,12 @@ export default {
   },
   mounted() {
     /* 售后服务 活动 优惠券 */
-    /* 初始化运费模板列表 */
-    getTemplatesList().then(data => {
-      if (data.data.status == 200) {
-        this.templateList = data.data.content;
-      }
-    });
-    /* 初始化品牌搜索列表 */
-    getBrandList({ pageNo: 1, pageSize: 250 }).then(data => {
-      if (data.data.status == 0) {
-        this.brandList = data.data.data.list;
-      }
-    });
-
-    getSupplierAll().then(data => {
-      if (data.data.status == 200) {
-        this.supplierList = data.data.content;
-      }
-    });
+    // /* 初始化品牌搜索列表 */
+    // getBrandList({ pageNo: 1, pageSize: 250 }).then(data => {
+    //   if (data.data.status == 0) {
+    //     this.brandList = data.data.data.list;
+    //   }
+    // });
     /* 初始化一级分类 */
     getCategoryByPar({ pageNo: 1, pageSize: 40 }).then(data => {
       this.cateOneList = data.data.data.list;
@@ -611,18 +595,6 @@ export default {
     relatedList: {
       handler() {
         this.goodsform.goodsIdList = this.relatedList;
-      }
-    },
-    /* 通过选择供应商获取模板 */
-    "goodsform.supplierId": {
-      handler() {
-        if (this.goodsform.supplierId) {
-          getTemplatesListBySup(this.goodsform.supplierId).then(data => {
-            if (data.data.status == 200) {
-              this.templateList = data.data.content;
-            }
-          });
-        }
       }
     }
   },

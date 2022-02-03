@@ -58,20 +58,11 @@
         </el-container>
       </el-container>
     </el-container>
-    <div class="IMbutton" v-if="isConnect">
-      <el-badge :value="unread" :hidden="unread===0">
-        <el-button type="success" plain icon="el-icon-chat-dot-round" @click="chatVisible=true"></el-button>
-      </el-badge>
-    </div>
-    <el-dialog :visible="chatVisible" class="chatWindow" width="75%" @close="chatVisible=false">
-      <chat-index></chat-index>
-    </el-dialog>
   </div>
 </template>
 
 <script>
 import tabsMenu from "../components/tabsMenu";
-import chatIndex from "../components/chat/chatIndex";
 import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
@@ -81,21 +72,10 @@ export default {
       gridData: [],
       userInfo: {},
       base: "",
-      chatVisible: false,
       showRouter: true
     };
   },
-  components: {
-    tabsMenu,
-    chatIndex
-  },
-  computed: {
-    ...mapGetters({
-      unread: "onGetUnReadNum",
-      isConnect: "onGetIsConnect",
-      levelList: "onGetBreadList"
-    })
-  },
+  components: { tabsMenu },
   mounted() {
     this.base = this.$store.state.base_url;
   },
@@ -106,11 +86,6 @@ export default {
         // console.log(this.userInfo, "999");
       },
       deep: true
-    },
-    chatVisible: {
-      handler() {
-        this.$store.commit("changeChatRouter", { name: "contact" });
-      }
     }
   },
   methods: {
@@ -142,52 +117,6 @@ export default {
   width: 100%;
   height: 100%;
   position: relative;
-  .IMbutton {
-    position: absolute;
-    bottom: 55px;
-    right: 30px;
-    width: 50px;
-    height: 50px;
-    z-index: 2000;
-    .el-badge {
-      height: 100%;
-      width: 100%;
-      .el-button {
-        padding: 0;
-        width: 100%;
-        height: 100%;
-        font-size: 22px;
-      }
-    }
-  }
-  .chatWindow {
-    .el-dialog__header {
-      position: absolute;
-      width: 50px;
-      right: 0;
-      z-index: 1;
-    }
-    .chatBoxTitle {
-      position: absolute;
-    }
-    .el-dialog {
-      width: 75%;
-      height: 700px;
-      display: flex;
-      flex-direction: column;
-      .el-dialog__header {
-        padding: 0;
-        height: 50px;
-        line-height: 50px;
-      }
-      .el-dialog__body {
-        height: 700px;
-        box-sizing: border-box;
-        position: relative;
-        padding: 0;
-      }
-    }
-  }
   .el-container {
     .el-header {
       display: flex;

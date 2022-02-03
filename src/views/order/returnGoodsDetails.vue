@@ -101,25 +101,6 @@
                 <el-form-item label="收货人姓名">
                   <el-input placeholder="收货人姓名" v-model="serviceDetails.contactName"></el-input>
                 </el-form-item>
-                <el-form-item label="所在区域">
-                  <div style="display:flex">
-                    <div style="width:140px;">
-                      <el-select v-model="serviceDetails.province" placeholder="省" @change="changeProvince({level:1})" filterable clearable>
-                        <el-option :label="item.criName" :value="item.criCode" v-for="item in provinceList" :key="item.id"></el-option>
-                      </el-select>
-                    </div>
-                    <div style="width:140px;">
-                      <el-select v-model="serviceDetails.city" placeholder="市" @change="changeProvince({level:2})" filterable clearable>
-                        <el-option :label="item.criName" :value="item.criCode" v-for="item in cityList" :key="item.id"></el-option>
-                      </el-select>
-                    </div>
-                    <div style="width:140px;">
-                      <el-select v-model="serviceDetails.county" placeholder="区" @change="changeProvince({level:3})" filterable clearable>
-                        <el-option :label="item.criName" :value="item.criCode" v-for="item in countyList" :key="item.id"></el-option>
-                      </el-select>
-                    </div>
-                  </div>
-                </el-form-item>
                 <el-form-item label="详细地址">
                   <el-input placeholder="详细地址" v-model="serviceDetails.returnAddress"></el-input>
                 </el-form-item>
@@ -225,10 +206,7 @@
 </template>
 
 <script>
-import { getAddressList } from "../../api/supplier";
 import { afterSaleReturnsInfo, confirmedReturn, confirmedReceiving } from "../../api/order";
-import { getProvinceList, getRegionList, getCityById } from "../../api/usercenter";
-import { getExpress } from "../../api/pay";
 import Thumbnail from "../../components/thumbnail";
 export default {
   components: { Thumbnail },
@@ -308,19 +286,19 @@ export default {
         this.saleImgs = this.afterSaleInfo.saleImg.split(",");
         if (this.afterSaleInfo.status == "2" || this.afterSaleInfo.status == "3") {
           // 调用订单物流信息接口
-          getExpress(this.afterSaleInfo.deliveryCode, this.afterSaleInfo.deliverySn).then(data => {
-            if (data.data.status == 200) {
-              if (data.data.content.message == "ok") {
-                this.activities = data.data.content.data;
-                // this.activitiesLength = this.activities.length;
-                this.$message({ message: "查询快递成功", type: "success" });
-              } else {
-                this.$message.warning(data.data.content.message);
-              }
-            } else {
-              this.$message.error(data.data.msg);
-            }
-          });
+          // getExpress(this.afterSaleInfo.deliveryCode, this.afterSaleInfo.deliverySn).then(data => {
+          //   if (data.data.status == 200) {
+          //     if (data.data.content.message == "ok") {
+          //       this.activities = data.data.content.data;
+          //       // this.activitiesLength = this.activities.length;
+          //       this.$message({ message: "查询快递成功", type: "success" });
+          //     } else {
+          //       this.$message.warning(data.data.content.message);
+          //     }
+          //   } else {
+          //     this.$message.error(data.data.msg);
+          //   }
+          // });
         }
       });
     }
@@ -331,12 +309,6 @@ export default {
       this.provinceList = data.data.content;
     });
 
-    // 根据登录的供应商信息获取所有地址信息
-    getAddressList().then(data => {
-      if (data.data.status == 200) {
-        this.addressList = data.data.content;
-      }
-    });
   },
   watch: {
     selectReceivingPoint: {
@@ -364,23 +336,6 @@ export default {
     }
   },
   methods: {
-    // 切换省市区
-    changeProvince(obj) {
-      if (obj.level == 1) {
-        getRegionList(this.serviceDetails.province).then(data => {
-          this.cityList = data.data.content;
-        });
-        this.serviceDetails.city = "";
-        this.serviceDetails.county = "";
-        this.county = {};
-        this.countyList = [];
-      } else if (obj.level == 2) {
-        getRegionList(this.serviceDetails.city).then(data => {
-          this.countyList = data.data.content;
-        });
-        this.serviceDetails.county = "";
-      }
-    },
     alter() {
       this.receiptVisible = false;
       this.receiveVisible = false;

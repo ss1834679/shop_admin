@@ -1,4 +1,7 @@
 import server from '../utils/server'
+
+// todo ADMIN 商品相关的接口
+
 /* 添加商品 */
 export function addGood(obj) {
     return server({

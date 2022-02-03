@@ -90,7 +90,6 @@
 
 <script>
 import { printShipments } from "../../api/order";
-// import JsBarcode from 'jsbarcode'
 import VueBarcode from "@xkeshi/vue-barcode";
 export default {
   components: {

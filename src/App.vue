@@ -5,25 +5,10 @@
 </template>
 
 <script>
-// import WebIM from "./utils/WebIM";
 // import { mapState, mapActions } from "vuex";
 
 export default {
-  name: "App",
-  // beforeMount() {
-  //   const userInfo = localStorage.getItem("userInfo") && JSON.parse(localStorage.getItem("userInfo"));
-  //   if (userInfo) {
-  //     const userName = userInfo.userId;
-  //     const password = userInfo.password;
-  //     var options = {
-  //       apiUrl: WebIM.config.apiURL,
-  //       user: userName,
-  //       pwd: password,
-  //       appKey: WebIM.config.appkey
-  //     };
-  //     WebIM.conn.open(options);
-  //   }
-  // }
+  name: "App"
 };
 </script>
 <style lang="less">

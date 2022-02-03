@@ -1,11 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import Chat from "./chat";
-import FriendModule from "./friendModule";
-import Emedia from "./emedia";
-import WebIM from '../utils/WebIM'
-
 Vue.use(Vuex)
 import { getUserMe, getMyMenu } from "../api/permission"
 import vue from '../main';
@@ -35,7 +30,6 @@ export default new Vuex.Store({
               { path: "/index/index", title: "系统首页", status: false },
               //{ path: "/index/indexSet/entrySet", title: "首页入口设置" },
               { path: "/index/setMyInfo", title: "账户设置" },
-              { path: "/description", title: "使用文档" },
               { path: "/index/honeIndexSet", title: "首页设置" }
             ]
           }, {
@@ -505,18 +499,7 @@ export default new Vuex.Store({
               huanUesr.PauYAFawjT = data.data.content.huanXinUser.password/* 环信用户密码 */
               localStorage.setItem("UCGSashAUaf", JSON.stringify(huanUesr))
             }
-            const user = localStorage.getItem("UCGSashAUaf") && JSON.parse(localStorage.getItem("UCGSashAUaf"));
-            if (user) {
-              const alihfa = user.UxuafX;
-              const pachabdk = user.PauYAFawjT;
-              var options = {
-                apiUrl: WebIM.config.apiURL,
-                user: alihfa,
-                pwd: pachabdk,
-                appKey: WebIM.config.appkey
-              };
-              (alihfa && pachabdk) && (WebIM.conn.open(options), commit("changeIsConnect", true))
-            }
+            // const user = localStorage.getItem("UCGSashAUaf") && JSON.parse(localStorage.getItem("UCGSashAUaf"));
           }
           commit("GETLOGIN", data.data.content)
           let origin = JSON.stringify(document.URL)
@@ -622,10 +605,5 @@ export default new Vuex.Store({
     onGetBreadList(state) {
       return state.breadCrumbList
     }
-  },
-  modules: {
-    chat: Chat,
-    friendModule: FriendModule,
-    emedia: Emedia
   }
 })

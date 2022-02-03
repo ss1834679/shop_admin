@@ -60,7 +60,7 @@
 
 <script>
 import { getRefundInfo, refundMoneyInfo } from "../../api/order";
-import { quickRefundV3_1 } from "../../api/pay";
+// import { quickRefundV3_1 } from "../../api/pay";
 export default {
   data() {
     return {
@@ -103,19 +103,19 @@ export default {
             refundNote: this.handleNotes
           }).then(data => {
             if (data.data.status == 0) {
-              quickRefundV3_1({
-                origMerchOrderNo: data.data.data.sn,
-                amount: data.data.data.refundAmount,
-                reason: data.data.data.returnReason,
-                refundAdvanceAmount: data.data.data.refundAmount
-              }).then(res => {
-                if (res.data.status == 0) {
-                  this.$message({ message: res.data.msg, type: "success" });
-                  this.$router.go(-1);
-                } else {
-                  this.$message.error(res.data.msg);
-                }
-              });
+              // quickRefundV3_1({
+              //   origMerchOrderNo: data.data.data.sn,
+              //   amount: data.data.data.refundAmount,
+              //   reason: data.data.data.returnReason,
+              //   refundAdvanceAmount: data.data.data.refundAmount
+              // }).then(res => {
+              //   if (res.data.status == 0) {
+              //     this.$message({ message: res.data.msg, type: "success" });
+              //     this.$router.go(-1);
+              //   } else {
+              //     this.$message.error(res.data.msg);
+              //   }
+              // });
               // this.$router.go(-1)
             } else {
               this.$message({

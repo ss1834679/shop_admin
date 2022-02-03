@@ -47,11 +47,6 @@
               <el-form-item label="搜索商品">
                 <div class="searchBar">
                   <div class="search_box">
-                    <el-select v-model="searchGoodValue" filterable remote value-key="id" :remote-method="selectSupplierGood" placeholder="请选择商品(搜索)">
-                      <el-option v-for="item in searchOrderGoodList" :key="item.id" :label="item.goodsTitle" :value="item.id"></el-option>
-                    </el-select>
-                  </div>
-                  <div class="search_box">
                     <el-select v-model="goodsOrderForm.goodsItemId" placeholder="请选择商品sku" value-key="id" clearable>
                       <el-option v-for="item in goodsItemList" :key="item.id" :label="item.itemTitle" :value="item.id"></el-option>
                     </el-select>
@@ -100,7 +95,6 @@
 
 <script>
 import { getOrderItemList } from "../../api/order";
-import { getSupplierList } from "../../api/supplier_per";
 import { getGoodsItem } from "../../api/indexRecommend";
 import Thumbnail from "../../components/thumbnail";
 export default {
@@ -288,15 +282,6 @@ export default {
       });
 
       return sums;
-    },
-    selectSupplierGood(val) {
-      if (val !== "") {
-        getSupplierList({ goodsTitle: val, pageNo: 1, pageSize: 20 }).then(data => {
-          if (data.data.status == 0) {
-            this.searchOrderGoodList = data.data.data.data.list;
-          }
-        });
-      }
     }
   }
 };

@@ -5,16 +5,10 @@ import store from './store'
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import elTableInfiniteScroll from 'el-table-infinite-scroll';
 
-import mavonEditor from 'mavon-editor'
-import 'mavon-editor/dist/css/index.css'
-
-import WebIM from './utils/WebIM';
 
 Vue.use(mavonEditor)
 Vue.use(ElementUI)
-Vue.use(elTableInfiniteScroll)
 Vue.prototype.imgUrl = 'https://cdn-file.tbzj.net/fileserver/file/'
 
 /**
@@ -38,18 +32,6 @@ Date.prototype.format = function (fmt) {
       fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
   return fmt;
 }
-
-let echarts = require('echarts/lib/echarts')
-require('echarts/lib/chart/line')
-require('echarts/lib/chart/pie')
-require('echarts/lib/component/tooltip')// 引入提示框和title组件，图例
-require('echarts/lib/component/title')
-require('echarts/lib/component/legend')
-require('echarts/lib/component/legendScroll')//图例滚动
-require('echarts/lib/component/axis')
-require('echarts/lib/component/grid')
-require('echarts/lib/component/toolbox')
-Vue.prototype.$echarts = echarts
 
 router.beforeEach((to, from, next) => {
   if (to.path == "/login" && from.path != "/login") {
@@ -95,7 +77,6 @@ Vue.prototype.$checkCardId = (rule, value, callback) => {
 var vue = new Vue({
   router,
   store,
-  WebIM,
   render: h => h(App)
 }).$mount('#app')
 

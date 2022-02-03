@@ -6,7 +6,6 @@
 </template>
 <script>
 import E from "wangeditor";
-// import imageConversion from "image-conversion"; /* 图片压缩的包 */
 export default {
   name: "editor",
   props: {
